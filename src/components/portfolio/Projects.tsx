@@ -1,0 +1,7 @@
+import { useState } from "react";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { projects, type Project } from "./data";
+import { ProjectModal } from "./ProjectModal";
+import { Section, SectionHeading } from "./Section";
+export function Projects(){const[selected,setSelected]=useState<Project|null>(null);return <Section id="projetos"><SectionHeading eyebrow="03 / PROJETOS" title="Projetos em destaque" copy="Algumas soluções fictícias desenvolvidas para demonstrar experiência técnica."/><div className="grid gap-5 md:grid-cols-2">{projects.map(p=><article className="project-card" key={p.id}><div className={`project-art project-art-${p.id}`}><span className="project-index">PROJECT / {p.id}</span><div className="project-screen"><i/><i/><i/></div></div><div className="p-6"><h3 className="font-display text-xl font-semibold">{p.name}</h3><p className="mt-3 min-h-18 text-sm leading-6 text-muted-foreground">{p.description}</p><div className="mt-5 flex flex-wrap gap-2">{p.tech.map(t=><span className="tech-tag" key={t}>{t}</span>)}</div><div className="mt-6 flex flex-wrap gap-3"><Button variant="hero" size="sm" onClick={()=>setSelected(p)}>Ver projeto <ExternalLink/></Button><Button variant="ghost" size="sm" onClick={()=>setSelected(p)}>Ver detalhes <ArrowRight/></Button></div></div></article>)}</div><ProjectModal project={selected} onClose={()=>setSelected(null)}/></Section>}
